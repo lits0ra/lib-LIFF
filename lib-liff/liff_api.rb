@@ -3,8 +3,14 @@ require 'uri'
 require 'json'
 require './lib-liff/liff_config'
 class LIFF
-    def initialize(channel_access_token)
-        @CHANNEL_ACCESS_TOKEN = channel_access_token
+
+    def initialize(channel_access_token=nil)
+        if channel_access_token == nil
+            raise("You must enter channel_access_token.")
+        else
+            @CHANNEL_ACCESS_TOKEN = channel_access_token
+    
+        end
     end
 
     def add_liff(view_type=nil, view_url=nil)
@@ -40,6 +46,7 @@ class LIFF
             end
         end
     end
+
     def delete_liff(liffId=nil)
         if liffId == nil
             raise("You must enter liffId.")
@@ -62,4 +69,5 @@ class LIFF
             end
         end
     end
+    
 end
