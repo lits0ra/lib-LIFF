@@ -24,7 +24,7 @@ class LINEFrontEndFramework
         response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
             http.request(request)
         end
-        return response.body
+        return "line://app/#{JSON.load(response.body)["liffId"]}"
     end
     
 end
