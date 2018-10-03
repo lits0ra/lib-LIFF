@@ -1,8 +1,8 @@
 require 'net/http'
 require 'uri'
 require 'json'
-require './lib-liff/config'
-class LINEFrontEndFramework
+require './lib-liff/liff_config'
+class LIFF
     def initialize(channel_access_token)
         @CHANNEL_ACCESS_TOKEN = channel_access_token
     end
@@ -15,7 +15,7 @@ class LINEFrontEndFramework
         elsif view_url == nil
             raise("You must enter view_url.")
         else
-            uri = URI.parse(Config::HOST)
+            uri = URI.parse(LIFFConfig::HOST)
             request = Net::HTTP::Post.new(uri)
             request.content_type = "application/json"
             request["Authorization"] = "Bearer #{@CHANNEL_ACCESS_TOKEN}"
@@ -44,7 +44,7 @@ class LINEFrontEndFramework
         if liffId == nil
             raise("You must enter liffId.")
         else
-            uri = URI.parse("#{Config::HOST}/#{liffId}")
+            uri = URI.parse("#{LIFFConfig::HOST}/#{liffId}")
             request = Net::HTTP::Delete.new(uri)
             request["Authorization"] = "Bearer #{@CHANNEL_ACCESS_TOKEN}"
             req_options = {
