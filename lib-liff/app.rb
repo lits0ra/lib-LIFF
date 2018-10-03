@@ -9,11 +9,11 @@ class LINEFrontEndFramework
 
     def add_liff(view_type=nil, view_url=nil)
         if view_type == nil and view_url == nil
-            raise("You must enter view_type and view_url")
+            raise("You must enter view_type and view_url.")
         elsif view_type == nil
-            raise("You must enter view_type")
+            raise("You must enter view_type.")
         elsif view_url == nil
-            raise("You must enter view_url")
+            raise("You must enter view_url.")
         else
             uri = URI.parse(Config::HOST)
             request = Net::HTTP::Post.new(uri)
@@ -37,6 +37,28 @@ class LINEFrontEndFramework
                 raise("400 Error\n・The request contains an invalid value.\n・The maximum number of LIFF applications that can be added to the channel has been reached.")
             elsif response.code == "401"
                 raise("401 Error\nCertification failed.")
+            end
+        end
+    end
+    def delete_liff(liffId=nil)
+        if liffId == nil
+            raise("You must enter liffId.")
+        else
+            uri = URI.parse("#{Config::HOST}/#{liffId}")
+            request = Net::HTTP::Delete.new(uri)
+            request["Authorization"] = "Bearer #{@CHANNEL_ACCESS_TOKEN}"
+            req_options = {
+                use_ssl: uri.scheme == "https",
+            }
+            response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+                http.request(request)
+            end
+            if response.code == "200"
+                return "Success"
+            elsif response.code == "401"
+                raise("401 Error\nCertification failed.")
+            elsif response.code == "404"
+                raise("404 Error\n・The specified LIFF application does not exist.\n・The specified LIFF application belongs to another channel.")
             end
         end
     end
