@@ -1,7 +1,7 @@
 require 'net/http'
 require 'uri'
 require 'json'
-require './config'
+require './lib-liff/config'
 class LINEFrontEndFramework
     def initialize(channel_access_token)
         @CHANNEL_ACCESS_TOKEN = channel_access_token
@@ -24,6 +24,7 @@ class LINEFrontEndFramework
         response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
             http.request(request)
         end
+        return response.body
     end
     
 end
