@@ -1,2 +1,2 @@
 # lib-LIFF
-LINEFrontEndFrameworkのwrapperみたいなやつ
+LINEFrontEndFrameworkのwrapper
