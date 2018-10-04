@@ -102,7 +102,7 @@ class LIFF
     end
 
     def get_all_liffId
-        uri = URI.parse("#{LIFFConfig::HOST}")
+        uri = URI.parse(LIFFConfig::HOST)
         request = Net::HTTP::Get.new(uri)
         request["Authorization"] = "Bearer #{@CHANNEL_ACCESS_TOKEN}"
         req_options = {
