@@ -17,7 +17,7 @@ class LIFF
       uri = URI.parse(LIFFConfig::HOST)
       request = Net::HTTP::Post.new(uri)
       request.content_type = 'application/json'
-      request['Authorization'] = "Bearer #{@CHANNEL_ACCESS_TOKEN}"
+      request['Authorization'] = "Bearer #{@channel_access_token}"
       request.body = JSON.dump(
         'view' => {
           'type' => view_type,
@@ -48,7 +48,7 @@ class LIFF
     else
       uri = URI.parse("#{LIFFConfig::HOST}/#{liffId}")
       request = Net::HTTP::Delete.new(uri)
-      request['Authorization'] = "Bearer #{@CHANNEL_ACCESS_TOKEN}"
+      request['Authorization'] = "Bearer #{@channel_access_token}"
       req_options = {
         use_ssl: uri.scheme == 'https'
       }
@@ -76,7 +76,7 @@ class LIFF
       uri = URI.parse("#{LIFFConfig::HOST}/#{liffId}#{LIFFConfig::UPDATE_ENDPOINT}")
       request = Net::HTTP::Put.new(uri)
       request.content_type = 'application/json'
-      request['Authorization'] = "Bearer #{@CHANNEL_ACCESS_TOKEN}"
+      request['Authorization'] = "Bearer #{@channel_access_token}"
       request.body = JSON.dump(
         'type' => view_type,
         'url' => view_url
@@ -100,7 +100,7 @@ class LIFF
   def get_all_liffId
     uri = URI.parse(LIFFConfig::HOST)
     request = Net::HTTP::Get.new(uri)
-    request['Authorization'] = "Bearer #{@CHANNEL_ACCESS_TOKEN}"
+    request['Authorization'] = "Bearer #{@channel_access_token}"
     req_options = {
       use_ssl: uri.scheme == 'https'
     }
