@@ -73,7 +73,7 @@ class LIFF
     elsif view_url.nil?
       raise('You must enter view_url.')
     else
-      uri = URI.parse("#{LIFFConfig::HOST}/#{liffId}#{LIFFConfig::UPDATE_ENDPOINT}")
+      uri = URI.parse("#{LIFFConfig::HOST}/#{liffId}#{LIFFConfig::UPDATE}")
       request = Net::HTTP::Put.new(uri)
       request.content_type = 'application/json'
       request['Authorization'] = "Bearer #{@channel_access_token}"
